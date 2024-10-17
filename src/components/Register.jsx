@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
-import { useAuth } from "../context/AuthContext";
+// import { useAuth } from "../context/AuthContext";
 
 const Register = () => {
   const [message, setMessage] = useState("");
-  const { registerUser, signInWithGoogle } = useAuth();
+  // const { registerUser, signInWithGoogle } = useAuth();
   // console.log(registerUser)
   const {
     register,
@@ -20,8 +20,9 @@ const Register = () => {
   const onSubmit = async (data) => {
     // console.log(data)
     try {
-      await registerUser(data.email, data.password);
-      alert("User registered successfully!");
+      // await registerUser(data.email, data.password);
+      console.log(data);
+      // alert("User registered successfully!");
     } catch (error) {
       setMessage("Please provide a valid email and password");
       console.error(error);
@@ -30,9 +31,10 @@ const Register = () => {
 
   const handleGoogleSignIn = async () => {
     try {
-      await signInWithGoogle();
-      alert("Login successful!");
-      navigate("/");
+      // await signInWithGoogle();
+      // alert("Login successful!");
+      console.log("Google Login");
+      // navigate("/");
     } catch (error) {
       alert("Google sign in failed!");
       console.error(error);
