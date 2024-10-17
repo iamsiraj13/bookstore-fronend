@@ -9,6 +9,7 @@ import { HiOutlineUser } from "react-icons/hi";
 
 import avatarImg from "../assets/avatar.png";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const navigation = [
   { name: "Dashboard", href: "/user-dashboard" },
@@ -21,7 +22,7 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const token = "";
-  const cartItems = [1, 2, 3, 4, 45];
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   const currentUser = false;
   return (
