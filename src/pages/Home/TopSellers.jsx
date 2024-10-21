@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,6 +11,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import BookCard from "../Books/BookCard";
+import { useGetAllBooksQuery } from "../../redux/features/book/booksApi";
 
 const categories = [
   "Choose a genre",
@@ -21,22 +22,17 @@ const categories = [
 ];
 
 const TopSellers = () => {
-  const [books, setBooks] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Choose a genre");
 
-  useEffect(() => {
-    fetch("books.json")
-      .then((res) => res.json()) // Fixed: .json() should be called as a method
-      .then((data) => setBooks(data));
-  }, []);
+  const { data: books = [] } = useGetAllBooksQuery();
 
   const filteredBooks =
     selectedCategory === "Choose a genre"
-      ? books
-      : books.filter(
+      ? books.book
+      : books.book.filter(
           (book) => book.category === selectedCategory.toLowerCase()
         );
-  console.log(books);
+
   return (
     <div className="py-10">
       <h2 className="text-3xl font-semibold mb-6">Top Sellers</h2>
@@ -81,7 +77,7 @@ const TopSellers = () => {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        {filteredBooks.length > 0 &&
+        {filteredBooks?.length > 0 &&
           filteredBooks.map((book, index) => (
             <SwiperSlide key={index}>
               <BookCard book={book} />

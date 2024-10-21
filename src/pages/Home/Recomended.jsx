@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -10,14 +9,11 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import BookCard from "../Books/BookCard";
+import { useGetAllBooksQuery } from "../../redux/features/book/booksApi";
 
 const Recommened = () => {
-  const [books, setBooks] = useState([]);
-  useEffect(() => {
-    fetch("books.json")
-      .then((res) => res.json()) // Fixed: .json() should be called as a method
-      .then((data) => setBooks(data));
-  }, []);
+  const { data: books = [] } = useGetAllBooksQuery();
+
   return (
     <div className="py-16">
       <h2 className="text-3xl font-semibold mb-6">Recommended for you </h2>
@@ -47,10 +43,10 @@ const Recommened = () => {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        {books.length > 0 &&
-          books.slice(8, 18).map((book, index) => (
+        {books?.book?.length > 0 &&
+          books?.book?.slice(8, 18).map((item, index) => (
             <SwiperSlide key={index}>
-              <BookCard book={book} />
+              <BookCard book={item} />
             </SwiperSlide>
           ))}
       </Swiper>
