@@ -13,6 +13,7 @@ import { useGetAllBooksQuery } from "../../redux/features/book/booksApi";
 
 const Recommened = () => {
   const { data: books = [] } = useGetAllBooksQuery();
+  // console.log(books.book);
 
   return (
     <div className="py-16">
@@ -44,9 +45,9 @@ const Recommened = () => {
         className="mySwiper"
       >
         {books?.book?.length > 0 &&
-          books?.book?.slice(8, 18).map((item, index) => (
+          books?.book?.map((book, index) => (
             <SwiperSlide key={index}>
-              <BookCard book={item} />
+              <BookCard book={book} />
             </SwiperSlide>
           ))}
       </Swiper>

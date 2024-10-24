@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+
 import { FiShoppingCart } from "react-icons/fi";
 import { getImgUrl } from "../../utils/getImgUrl";
 
@@ -34,10 +34,9 @@ const BookCard = ({ book }) => {
             </h3>
           </Link>
           <p className="text-gray-600 mb-5">
-            {/* {book?.description?.length > 80
+            {book?.description?.length > 80
               ? `${book.description.slice(0, 80)}...`
-              : book?.description} */}
-            {/* {book?.description} */}
+              : book?.description}
           </p>
           <p className="font-medium mb-5">
             ${book?.newPrice}{" "}
